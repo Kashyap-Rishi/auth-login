@@ -7,6 +7,7 @@ width:38%;
 border-radius:2px;
 margin-left:10px;
 display:flex;
+margin-right:30px;
 `;
 
 const InputSearchBase=styled(InputBase)`
