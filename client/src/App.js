@@ -1,7 +1,7 @@
 
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import {  Box, Typography } from '@mui/material'
+import {  Box } from '@mui/material'
 function App() {
   return (
     <div className="App">

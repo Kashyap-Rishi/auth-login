@@ -6,6 +6,7 @@ const Component = styled(Box)`
     display: flex;
     justify-content: space-between;
     margin: 55px 130px 0 130px ;
+
 `
 const Container = styled(Box)`
     padding: 12px 8px;
@@ -16,7 +17,7 @@ const Text = styled(Typography)`
     font-size: 14px;
     font-weight: 600;
     font-family: inherit;
-`
+`;
 
 const NavBar = () => {
     return (
