@@ -9,7 +9,6 @@ const Connection = async (username,password) => {
     } catch(error) {
         console.log('Error: ', error.message);
     }
-
 };
 
 export default Connection;
