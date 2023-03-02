@@ -1,13 +1,14 @@
 import express from 'express'
-import Connection from './database/db.js';
 import dotenv from 'dotenv'
+
+import Connection from './database/db.js';
+import DefaultData from './default.js';
 
 dotenv.config();
 
 const app=express()
 
-//JSON
-app.use(express.json())
+
 
 
 
@@ -19,6 +20,9 @@ const PASSWORD=process.env.DB_PASSWORD;
 
 Connection(USERNAME,PASSWORD);
 
+
 app.listen(PORT,()=>{
     console.log(`Server started successfully at http://localhost:${PORT}`)
 })
+
+DefaultData();
