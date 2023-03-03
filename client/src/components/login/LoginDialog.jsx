@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Dialog, DialogContent, TextField, Box, Button, Typography, styled } from '@mui/material';
-
+import { DataContext } from '../context/DataProvider';
  import { authenticateLogin, authenticateSignup } from '../../service/api';
 
 const Component = styled(DialogContent)`
@@ -106,7 +106,7 @@ const LoginDialog = ({ open, setOpen }) => {
 
     const [ account, toggleAccount ] = useState(accountInitialValues.login);//For login and signup display purpose
     const [signup, setSignup]=useState(signupInitialValues)//We have to pass an initial value which we take as a object
-
+    const{setAccount}=useContext(DataContext);
 
     const toggleSignup = () => {
         toggleAccount(accountInitialValues.signup);
@@ -125,6 +125,9 @@ const LoginDialog = ({ open, setOpen }) => {
     
     const signupUser=async()=>{
      let response= await authenticateSignup(signup);
+     if (!response) return;
+     handleClose();
+     setAccount(signup.firstname);
     }//AFter clicking the button we need to call an api
 
 
