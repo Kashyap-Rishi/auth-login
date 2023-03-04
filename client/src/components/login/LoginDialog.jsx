@@ -106,6 +106,9 @@ const LoginDialog = ({ open, setOpen }) => {
 
     const [ account, toggleAccount ] = useState(accountInitialValues.login);//For login and signup display purpose
     const [signup, setSignup]=useState(signupInitialValues)//We have to pass an initial value which we take as a object
+    const [login, setLogin]=useState(loginInitialValues)
+    const [error,setError]=useState(false);
+
     const{setAccount}=useContext(DataContext);
 
     const toggleSignup = () => {
@@ -115,7 +118,7 @@ const LoginDialog = ({ open, setOpen }) => {
     const handleClose = () => {
         setOpen(false);
         toggleAccount(accountInitialValues.login);
-        
+        setError(false);
     }
 
     const onInputChange=(e)=>{
@@ -123,6 +126,22 @@ const LoginDialog = ({ open, setOpen }) => {
         
     }//name field is used as a differentiating factor for different fields.
     
+    const onValueChange=(e)=>{
+        setLogin({...login, [e.target.name]:e.target.value});//for adressing input changes
+        
+    }
+
+    const loginUser=async()=>{
+let response=await authenticateLogin(login);
+if(response.status===200){
+    handleClose();
+    setAccount(response.data.data.firstname);
+}else{
+setError(true);
+}
+    }
+
+
     const signupUser=async()=>{
      let response= await authenticateSignup(signup);
      if (!response) return;
@@ -142,11 +161,11 @@ const LoginDialog = ({ open, setOpen }) => {
                     {
                         account.view === 'login' ? 
                         <Wrapper>
-                            <TextField variant="standard"  name='username' label='Enter Email/Mobile number' />
-                            
-                            <TextField variant="standard"  name='password' label='Enter Password' />
+                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='username' label='Enter Username' />
+                            {error &&<Error>Please enter valid username or password</Error>}
+                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
                             <Text>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
-                            <LoginButton >Login</LoginButton>
+                            <LoginButton onClick={()=>loginUser()} >Login</LoginButton>
                             <Text style={{textAlign:'center'}}>OR</Text>
                             <RequestOTP>Request OTP</RequestOTP>
                             <CreateAccount onClick={() => toggleSignup()}>New to Flipkart? Create an account</CreateAccount>
