@@ -35,6 +35,7 @@ const Banner = () => {
           autoplay={true}
           autoaySpeed={4000}
           infinite={true}
+          keyBoardControl={true}
           slidesToSlide={1}
           containerClass="carousel-container"
           dotListClass="custom-dot-list-style"
