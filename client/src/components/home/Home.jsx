@@ -1,6 +1,7 @@
 import {styled, Box } from '@mui/material'
 import Banner from './Banner'
 import Navbar from './Navbar'
+import Slide from './Slide'
 
 const Component=styled(Box)`
 padding:10px;
@@ -13,6 +14,7 @@ const Home = () => {
     <Navbar/>
     <Component>
       <Banner/>
+      <Slide/>
     </Component>
     
     </>
